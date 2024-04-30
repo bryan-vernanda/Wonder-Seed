@@ -11,7 +11,7 @@ import SwiftUI
 struct Nano1ShakeFeatureApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
         }
     }
 }

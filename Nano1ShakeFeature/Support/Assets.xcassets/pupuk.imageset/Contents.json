@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "pupuk.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "8da62df5861ceb13e848df31fb19d173.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
