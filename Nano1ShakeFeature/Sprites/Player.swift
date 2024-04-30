@@ -25,7 +25,7 @@ class Player: SKNode {
         
         self.setScale(0.5)
         self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "penyiram"), size: CGSize(width: image.size.width * 0.5, height: image.size.height * 0.5))
-        self.physicsBody?.isDynamic = false
+        self.physicsBody?.isDynamic = true
         self.physicsBody?.categoryBitMask = CollisionTypes.player.rawValue
         self.physicsBody?.collisionBitMask = CollisionTypes.wall.rawValue
 //        player.physicsBody?.restitution = 0.9

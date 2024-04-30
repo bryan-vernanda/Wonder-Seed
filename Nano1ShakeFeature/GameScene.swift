@@ -1,8 +1,8 @@
 //
-//  CombineFeatureView.swift
+//  GameScene.swift
 //  Nano1ShakeFeature
 //
-//  Created by Bryan Vernanda on 29/04/24.
+//  Created by Bryan Vernanda on 30/04/24.
 //
 
 import SwiftUI
@@ -26,10 +26,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var rainDropSpawnRate : TimeInterval = 0.5
     var player = Player(image: SKSpriteNode(imageNamed: "penyiram"))
     var player2 = SKSpriteNode(imageNamed: "bucketPupuk")
-    var plant = Plant(image: SKSpriteNode(imageNamed: "bibit"))
-    var plant2 = Plant(image: SKSpriteNode(imageNamed: "growth1"))
-    var plant3 = Plant(image: SKSpriteNode(imageNamed: "growth2"))
-    var plant4 = Plant(image: SKSpriteNode(imageNamed: "growth3"))
+    var plant = Plant(image: SKSpriteNode(imageNamed: "bibit"), 0.1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/3 - 30), 0.1)
+    var plant2 = Plant(image: SKSpriteNode(imageNamed: "growth1"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 120), 1)
+    var plant3 = Plant(image: SKSpriteNode(imageNamed: "growth2"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 70), 1)
+//    var plant4 = Plant(image: SKSpriteNode(imageNamed: "growth3"))
     private var isDragging = false
     var backgroundNode = SKSpriteNode()
     var mapSize: CGSize = CGSize()
@@ -65,7 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(wall)
         
         player.updatePosition(point: CGPoint(x: UIScreen.main.bounds.width/5, y: UIScreen.main.bounds.height/6))
-
+        
         self.addChild(player)
         self.addChild(plant)
         
@@ -121,7 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if currentRainDropSpawnTime > rainDropSpawnRate {
                 currentRainDropSpawnTime = 0
                 
-                if progressBar < 20 {
+                if progressBar < 10 {
                     spawnRain(image: SKSpriteNode(imageNamed: "air"), posisi)
                 } else {
                     spawnRain(image: SKSpriteNode(imageNamed: "pupuk"), posisi)
@@ -139,6 +139,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        
+        let scaleUpAction = SKAction.scale(to: 1.1, duration: 0.1)
+        let scaleDownAction = SKAction.scale(to: 1.0, duration: 0.1)
+        let springAction = SKAction.sequence([scaleUpAction, scaleDownAction])
+        
         if (contact.bodyA.categoryBitMask == CollisionTypes.droplets.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.wall.rawValue) {
             contact.bodyA.node?.physicsBody?.categoryBitMask = 0
         } else if (contact.bodyA.categoryBitMask == CollisionTypes.wall.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.droplets.rawValue) {
@@ -156,24 +161,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyB.node?.physicsBody?.categoryBitMask = 0
             
             // to handle water to the plant event
-            if progressBar < 20.0 {
+            if progressBar < 10.0 {
                 progressBar += 1.0
-                if(progressBar == 20) {
+                if(progressBar == 10) {
                     player.removeAllChildren()
+                    player2.run(springAction)
                     player.addChild(player2)
-                    plant.removeAllChildren()
-                    plant.addChild(plant2)
-                    plant.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 120)
-                    plant.setScale(1)
+                    plant.removeFromParent()
+                    plant2.run(springAction)
+                    self.addChild(plant2)
                 }
-            } else if fertilizerProgress < 20 {
+            } else if fertilizerProgress < 10 {
                 fertilizerProgress += 1.0
-//                if(fertilizerProgress == 20) {
-//                    plant.removeAllChildren()
-//                    plant.addChild(plant3)
-//                }
+                if(fertilizerProgress == 10) {
+                    plant2.removeFromParent()
+                    plant3.run(springAction)
+                    self.addChild(plant3)
+                }
             }
-
+            
         } else if (contact.bodyA.categoryBitMask == CollisionTypes.droplets.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.plant.rawValue){
             let move = SKAction.move(to: nodeB.position, duration: 0.25)
             let scale = SKAction.scale(to: 0.0001, duration: 0.25)
@@ -182,47 +188,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyA.node?.physicsBody?.categoryBitMask = 0
             
             // to handle water to the plant event
-            if progressBar < 20.0 {
+            if progressBar < 10.0 {
                 progressBar += 1.0
-                if(progressBar == 20) {
+                if(progressBar == 10) {
                     player.removeAllChildren()
+                    player2.run(springAction)
                     player.addChild(player2)
-                    plant.removeAllChildren()
-                    plant.addChild(plant2)
-                    plant.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 120)
-                    plant.setScale(1)
+                    plant.removeFromParent()
+                    plant2.run(springAction)
+                    self.addChild(plant2)
                 }
-            } else if fertilizerProgress < 20 {
+            } else if fertilizerProgress < 10 {
                 fertilizerProgress += 1.0
-//                if(fertilizerProgress == 20) {
-//                    plant.removeAllChildren()
-//                    plant.addChild(plant3)
-//                }
+                if(fertilizerProgress == 10) {
+                    plant2.removeFromParent()
+                    plant3.run(springAction)
+                    self.addChild(plant3)
+                }
             }
             
         }
     }
     
-}
-
-
-//nanti ini jadi di planting view lah
-struct CombineFeatureView: View {
-    var scene: SKScene {
-        let scene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        scene.scaleMode = .fill
-        return scene
-    }
-    
-    var body: some View {
-        VStack {
-            SpriteView(scene: scene)
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                .ignoresSafeArea()
-        }
-    }
-}
-
-#Preview {
-    CombineFeatureView()
 }

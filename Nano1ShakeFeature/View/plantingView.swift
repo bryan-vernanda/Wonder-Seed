@@ -11,7 +11,6 @@ import SpriteKit
 struct plantingView: View {
     var gameScene: GameScene
     @State var progressBar:CGFloat = 0
-    @State var imageIndicator: Int = 0
     @State var fertilizerProgress: CGFloat = 0
     @Environment (\.dismiss) var dismiss
     
@@ -33,20 +32,6 @@ struct plantingView: View {
             
             WaterBar(current: $progressBar, width: 177, height: 16)
                 .position(CGPoint(x: 130, y: 80))
-//                .onChange(of: imageIndicator) {
-//                    //declare image index 1
-//                    if progressBar == 20 {
-//                        // nanti disini switch imagenya, bikin pake zstack, opacity, with animation, delay
-//                        imageIndicator = 1
-//                    } else if fertilizerProgress == 20 {
-//                        // anti disini switch imagenya, bikin pake zstack, opacity, with animation, delay
-//                        imageIndicator = 2
-//                    } else{
-//                        // nanti disini bikin mataharinya
-//                        imageIndicator = 3
-//                    }
-//                }
-
             
             fertilizerBar(current: $fertilizerProgress, width: 177, height: 16)
                 .position(CGPoint(x: 130, y: 120))

@@ -28,7 +28,7 @@ struct fertilizerBar: View {
                 .padding(.leading, 5)
             
             RoundedRectangle(cornerRadius: 100, style: .continuous)
-                .frame(width: (current * 5) * multiplier, height: height - 10)
+                .frame(width: (current * 10) * multiplier, height: height - 10)
                 .background(
                     Color(UIColor(red: 135/255, green: 119/255, blue: 18/255, alpha: 1))
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
