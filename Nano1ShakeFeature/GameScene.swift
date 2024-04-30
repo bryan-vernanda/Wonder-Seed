@@ -26,10 +26,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var rainDropSpawnRate : TimeInterval = 0.5
     var player = Player(image: SKSpriteNode(imageNamed: "penyiram"))
     var player2 = SKSpriteNode(imageNamed: "bucketPupuk")
-    var plant = Plant(image: SKSpriteNode(imageNamed: "bibit"), 0.1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/3 - 30), 0.1)
-    var plant2 = Plant(image: SKSpriteNode(imageNamed: "growth1"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 120), 1)
+    
+    var plant = Plant(image: SKSpriteNode(imageNamed: "bibit"), 0.1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/3 - 24), 0.1)
+    var plant1p5 = Plant(image: SKSpriteNode(imageNamed: "growth1p5"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/3 - 5), 1)
+    var plant2 = Plant(image: SKSpriteNode(imageNamed: "growth1"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 115), 1)
+    var plant2p5 = Plant(image: SKSpriteNode(imageNamed: "growth2p5"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 83), 1)
     var plant3 = Plant(image: SKSpriteNode(imageNamed: "growth2"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 70), 1)
-//    var plant4 = Plant(image: SKSpriteNode(imageNamed: "growth3"))
+    var plant3p5 = Plant(image: SKSpriteNode(imageNamed: "growth3p5"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 58), 1)
+    var plant4 = Plant(image: SKSpriteNode(imageNamed: "growth3"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 56), 1)
+    
     private var isDragging = false
     var backgroundNode = SKSpriteNode()
     var mapSize: CGSize = CGSize()
@@ -163,18 +168,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // to handle water to the plant event
             if progressBar < 10.0 {
                 progressBar += 1.0
-                if(progressBar == 10) {
+                if(progressBar == 6) {
+                    plant.removeFromParent()
+                    plant1p5.run(springAction)
+                    self.addChild(plant1p5)
+                } else if(progressBar == 10) {
                     player.removeAllChildren()
                     player2.run(springAction)
                     player.addChild(player2)
-                    plant.removeFromParent()
+                    plant1p5.removeFromParent()
                     plant2.run(springAction)
                     self.addChild(plant2)
                 }
             } else if fertilizerProgress < 10 {
                 fertilizerProgress += 1.0
-                if(fertilizerProgress == 10) {
+                if(fertilizerProgress == 6) {
                     plant2.removeFromParent()
+                    plant2p5.run(springAction)
+                    self.addChild(plant2p5)
+                } else if(fertilizerProgress == 10) {
+                    plant2p5.removeFromParent()
                     plant3.run(springAction)
                     self.addChild(plant3)
                 }
@@ -190,18 +203,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // to handle water to the plant event
             if progressBar < 10.0 {
                 progressBar += 1.0
-                if(progressBar == 10) {
+                if(progressBar == 6) {
+                    plant.removeFromParent()
+                    plant1p5.run(springAction)
+                    self.addChild(plant1p5)
+                } else if(progressBar == 10) {
                     player.removeAllChildren()
                     player2.run(springAction)
                     player.addChild(player2)
-                    plant.removeFromParent()
+                    plant1p5.removeFromParent()
                     plant2.run(springAction)
                     self.addChild(plant2)
                 }
             } else if fertilizerProgress < 10 {
                 fertilizerProgress += 1.0
-                if(fertilizerProgress == 10) {
+                if(fertilizerProgress == 6) {
                     plant2.removeFromParent()
+                    plant2p5.run(springAction)
+                    self.addChild(plant2p5)
+                } else if(fertilizerProgress == 10) {
+                    plant2p5.removeFromParent()
                     plant3.run(springAction)
                     self.addChild(plant3)
                 }
@@ -209,5 +230,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
     }
+}
+
+struct contextView: View {
+    var gameScene: GameScene
+    @State var progressBar:CGFloat = 0
+    @State var fertilizerProgress: CGFloat = 0
+    @Environment (\.dismiss) var dismiss
     
+    init() {
+        gameScene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        gameScene.scaleMode = .fill
+    }
+    
+    var body: some View {
+        ZStack {
+            SpriteView(scene: gameScene)
+                .ignoresSafeArea()
+                .onReceive(gameScene.$progressBar, perform: { value in
+                    self.progressBar = value
+                })
+                .onReceive(gameScene.$fertilizerProgress, perform: { value in
+                    self.fertilizerProgress = value
+                })
+            
+            WaterBar(current: $progressBar, width: 177, height: 16)
+                .position(CGPoint(x: 130, y: 80))
+            
+            fertilizerBar(current: $fertilizerProgress, width: 177, height: 16)
+                .position(CGPoint(x: 130, y: 120))
+            
+            Button(action: {
+                dismiss()
+                print("Success")
+            }) {
+                Image(systemName: "chevron.backward.circle")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color("P-700"))
+                    .frame(width: 30, height: 30)
+            }.position(CGPoint(x: 50, y: 20))
+        }
+        .navigationBarBackButtonHidden()
+    }
+}
+
+#Preview {
+    contextView()
 }

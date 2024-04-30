@@ -20,7 +20,6 @@
 		93136A882BDD53A600C04E4C /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93136A872BDD53A600C04E4C /* ringtone.mp3 */; };
 		9314AA732BDBC08E00E8060B /* ThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314AA722BDBC08E00E8060B /* ThirdView.swift */; };
 		934873182BE08E37008FC3A5 /* AnimatedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934873172BE08E37008FC3A5 /* AnimatedImage.swift */; };
-		9348731A2BE092AA008FC3A5 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934873192BE092AA008FC3A5 /* test.swift */; };
 		9348731C2BE14638008FC3A5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9348731B2BE14638008FC3A5 /* GameScene.swift */; };
 		93512FD82BDA1189003AE2A0 /* Nano1ShakeFeatureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93512FD72BDA1189003AE2A0 /* Nano1ShakeFeatureApp.swift */; };
 		93512FDA2BDA1189003AE2A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93512FD92BDA1189003AE2A0 /* ContentView.swift */; };
@@ -44,7 +43,6 @@
 		93136A872BDD53A600C04E4C /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = "<group>"; };
 		9314AA722BDBC08E00E8060B /* ThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdView.swift; sourceTree = "<group>"; };
 		934873172BE08E37008FC3A5 /* AnimatedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImage.swift; sourceTree = "<group>"; };
-		934873192BE092AA008FC3A5 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		9348731B2BE14638008FC3A5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		93512FD42BDA1189003AE2A0 /* Nano1ShakeFeature.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nano1ShakeFeature.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93512FD72BDA1189003AE2A0 /* Nano1ShakeFeatureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nano1ShakeFeatureApp.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				930E6FC02BDF587500A026CD /* AchivementView2.swift */,
 				930E6FF22BDFE03100A026CD /* WaterBar.swift */,
 				930E6FF42BDFE07700A026CD /* fertilizerBar.swift */,
-				934873192BE092AA008FC3A5 /* test.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -234,7 +231,6 @@
 				930E6FE12BDF67D800A026CD /* WallGame.swift in Sources */,
 				934873182BE08E37008FC3A5 /* AnimatedImage.swift in Sources */,
 				9314AA732BDBC08E00E8060B /* ThirdView.swift in Sources */,
-				9348731A2BE092AA008FC3A5 /* test.swift in Sources */,
 				93512FEA2BDA7F8A003AE2A0 /* ShakeGestureManager.swift in Sources */,
 				930E6FED2BDFD3D300A026CD /* Plant.swift in Sources */,
 				93136A842BDD45AA00C04E4C /* SplashView.swift in Sources */,
