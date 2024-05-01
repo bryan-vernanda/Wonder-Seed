@@ -12,9 +12,6 @@ struct SplashView: View {
     
     var body: some View {
         VStack {
-//            Text("DogSOS")
-//                .font(.system(size: 55, weight: .bold, design: .default))
-//                .foregroundColor(.black)
             Image("SeedSplash")
             .resizable()
             .aspectRatio(contentMode: .fit)
