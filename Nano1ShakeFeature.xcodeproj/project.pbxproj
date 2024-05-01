@@ -28,6 +28,7 @@
 		93512FDF2BDA118C003AE2A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93512FDE2BDA118C003AE2A0 /* Preview Assets.xcassets */; };
 		93512FEA2BDA7F8A003AE2A0 /* ShakeGestureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93512FE92BDA7F8A003AE2A0 /* ShakeGestureManager.swift */; };
 		93512FF22BDA8F5A003AE2A0 /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93512FF12BDA8F5A003AE2A0 /* Shake.swift */; };
+		E4A12BC72BE2661B007E408B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E4A12BC62BE2661B007E408B /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		93512FDE2BDA118C003AE2A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		93512FE92BDA7F8A003AE2A0 /* ShakeGestureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGestureManager.swift; sourceTree = "<group>"; };
 		93512FF12BDA8F5A003AE2A0 /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
+		E4A12BC62BE2661B007E408B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 		93512FCB2BDA1189003AE2A0 = {
 			isa = PBXGroup;
 			children = (
+				E4A12BC62BE2661B007E408B /* .gitignore */,
 				93512FD62BDA1189003AE2A0 /* Nano1ShakeFeature */,
 				93512FD52BDA1189003AE2A0 /* Products */,
 			);
@@ -208,6 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4A12BC72BE2661B007E408B /* .gitignore in Resources */,
 				93512FDF2BDA118C003AE2A0 /* Preview Assets.xcassets in Resources */,
 				93136A882BDD53A600C04E4C /* ringtone.mp3 in Resources */,
 				93512FDC2BDA118C003AE2A0 /* Assets.xcassets in Resources */,
@@ -372,7 +376,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nano1ShakeFeature/Preview Content\"";
-				DEVELOPMENT_TEAM = 2U62MM8G6X;
+				DEVELOPMENT_TEAM = Z5LAH6MA86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -401,7 +405,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nano1ShakeFeature/Preview Content\"";
-				DEVELOPMENT_TEAM = 2U62MM8G6X;
+				DEVELOPMENT_TEAM = Z5LAH6MA86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
