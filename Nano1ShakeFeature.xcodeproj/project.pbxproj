@@ -45,7 +45,7 @@
 		9314AA722BDBC08E00E8060B /* ThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdView.swift; sourceTree = "<group>"; };
 		9348731B2BE14638008FC3A5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		9348731D2BE214A8008FC3A5 /* WaterSphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterSphere.swift; sourceTree = "<group>"; };
-		93512FD42BDA1189003AE2A0 /* Nano1ShakeFeature.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nano1ShakeFeature.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		93512FD42BDA1189003AE2A0 /* Wonder Seed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wonder Seed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93512FD72BDA1189003AE2A0 /* Nano1ShakeFeatureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nano1ShakeFeatureApp.swift; sourceTree = "<group>"; };
 		93512FD92BDA1189003AE2A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		93512FDB2BDA118C003AE2A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		93512FD52BDA1189003AE2A0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				93512FD42BDA1189003AE2A0 /* Nano1ShakeFeature.app */,
+				93512FD42BDA1189003AE2A0 /* Wonder Seed.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,9 +156,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		93512FD32BDA1189003AE2A0 /* Nano1ShakeFeature */ = {
+		93512FD32BDA1189003AE2A0 /* Wonder Seed */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93512FE22BDA118C003AE2A0 /* Build configuration list for PBXNativeTarget "Nano1ShakeFeature" */;
+			buildConfigurationList = 93512FE22BDA118C003AE2A0 /* Build configuration list for PBXNativeTarget "Wonder Seed" */;
 			buildPhases = (
 				93512FD02BDA1189003AE2A0 /* Sources */,
 				93512FD12BDA1189003AE2A0 /* Frameworks */,
@@ -168,9 +168,9 @@
 			);
 			dependencies = (
 			);
-			name = Nano1ShakeFeature;
+			name = "Wonder Seed";
 			productName = Nano1ShakeFeature;
-			productReference = 93512FD42BDA1189003AE2A0 /* Nano1ShakeFeature.app */;
+			productReference = 93512FD42BDA1189003AE2A0 /* Wonder Seed.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -201,7 +201,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				93512FD32BDA1189003AE2A0 /* Nano1ShakeFeature */,
+				93512FD32BDA1189003AE2A0 /* Wonder Seed */,
 			);
 		};
 /* End PBXProject section */
@@ -438,7 +438,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93512FE22BDA118C003AE2A0 /* Build configuration list for PBXNativeTarget "Nano1ShakeFeature" */ = {
+		93512FE22BDA118C003AE2A0 /* Build configuration list for PBXNativeTarget "Wonder Seed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93512FE32BDA118C003AE2A0 /* Debug */,
