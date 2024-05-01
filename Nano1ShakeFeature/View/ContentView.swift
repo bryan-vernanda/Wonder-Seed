@@ -47,7 +47,7 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                     NavigationLink(
-                        destination: AchivementView(),
+                        destination: AchivementView(checkImage: false),
                         label: {
                             Image("SeedNavLogo")
                         }
@@ -55,6 +55,12 @@ struct ContentView: View {
                 }
                 .frame(width: 80, height: 80)
                 .position(x: UIScreen.main.bounds.width - 70, y: UIScreen.main.bounds.height - 170)
+                
+                Vibrate(image: "vibrateL")
+                    .position(x: 40, y: 380)
+                    .rotationEffect(.degrees(180))
+                Vibrate(image: "vibrateR")
+                    .position(x: 40, y: 380)
             }
         }
     }

@@ -9,8 +9,9 @@ import SwiftUI
 
 struct AchivementView: View {
     @State var isNavigate = false
-    
+    var checkImage: Bool
     @Environment(\.dismiss)  var dismiss
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment:.topLeading) {
@@ -30,14 +31,20 @@ struct AchivementView: View {
                         .frame(width: 120, height: 120)
                         .padding(.bottom, 50)
                     HStack{
-                        Button {
-                            isNavigate = true
-                        } label: {
-                            Image("randomSeed").resizable()
-                                .aspectRatio(contentMode: .fit)
+                        if (checkImage) {
+                            GlowingView(image: "apple")
                                 .frame(width: 60, height: 60)
-                            
+                        } else {
+                            Button {
+                                isNavigate = true
+                            } label: {
+                                Image("randomSeed").resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 60, height: 60)
+                                
+                            }
                         }
+                        
                         Image("randomSeed").resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 60, height: 60)
@@ -122,6 +129,6 @@ struct AchivementView: View {
 }
 
 #Preview {
-    AchivementView()
+    AchivementView(checkImage: true)
 }
 
