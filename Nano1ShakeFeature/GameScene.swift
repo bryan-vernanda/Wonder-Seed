@@ -284,34 +284,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-//        if (contact.bodyA.categoryBitMask == CollisionTypes.plant.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.waterSphere.rawValue) {
-//            
-//            if let waterSphereNode = contact.bodyB.node as? WaterSphere {
-//                checkValue = waterSphereNode.checkWater()
-//                print("1: \(checkValue)")
-//            }
-//            
-//            print("1")
-//            
-//            contact.bodyB.node?.run(sequenceA)
-//            contact.bodyB.node?.physicsBody?.categoryBitMask = 0
-//            
-//        } else if (contact.bodyA.categoryBitMask == CollisionTypes.waterSphere.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.plant.rawValue) {
-//            
-//            let waterSphereNode = contact.bodyB.node as? WaterSphere
-//            print("\(String(describing: waterSphereNode?.checkWater()))")
-//            
-//            if let waterSphereNode = contact.bodyA.node as? WaterSphere {
-//                checkValue = waterSphereNode.checkWater()
-//                print("2: \(checkValue)")
-//            }
-//            
-//            print("2")
-//            
-//            contact.bodyA.node?.run(sequenceB)
-//            contact.bodyA.node?.physicsBody?.categoryBitMask = 0
-//        }
-        
     }
 }
 
