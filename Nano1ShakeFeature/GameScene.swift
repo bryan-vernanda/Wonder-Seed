@@ -15,7 +15,7 @@ enum CollisionTypes: UInt32 {
     case wall = 2
     case droplets = 4
     case plant = 8
-//    case floor = 16
+    case waterSphere = 16
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -52,20 +52,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundNode.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(backgroundNode)
         
-        var worldFrame = frame
-        worldFrame.origin.x += 30
-        worldFrame.origin.y += 20
-        worldFrame.size.height -= 40
-        worldFrame.size.width -= 55
+//                var worldFrame = frame
+//                worldFrame.origin.x -= 0.5
+//                worldFrame.origin.y += 0.5
+//                worldFrame.size.height -= 40
+        //        worldFrame.size.width -= 80
         
-        let wall = WallGame(worldFrame: worldFrame)
+        let wall = WallGame(worldFrame: frame)
         
-//        check border wall
-//        let edgeNode = SKShapeNode(rect: worldFrame)
-//        edgeNode.strokeColor = .red
-//        edgeNode.lineWidth = 5
-//        edgeNode.physicsBody = physicsBody
-//        addChild(edgeNode)
+//                check border wall
+//                let path = UIBezierPath(roundedRect: frame, cornerRadius: 60)
+//                let edgeNode = SKShapeNode(path: path.cgPath)
+//                edgeNode.strokeColor = .red
+//                edgeNode.lineWidth = 5
+//                edgeNode.physicsBody = physicsBody
+//                addChild(edgeNode)
         
         self.addChild(wall)
         
@@ -82,21 +83,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
-
+        
         if let point = touchPoint {
-          player.setDestination(destination: point)
+            player.setDestination(destination: point)
             player.physicsBody?.isDynamic = false
-          isDragging = true
+            isDragging = true
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
-
+        
         if let point = touchPoint {
-          player.setDestination(destination: point)
+            player.setDestination(destination: point)
             player.physicsBody?.isDynamic = false
-          isDragging = true
+            isDragging = true
         }
     }
     
@@ -107,40 +108,54 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        if let accelerometerData = motionManager?.accelerometerData {
+            self.physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 7, dy: accelerometerData.acceleration.y * 7)
+        }
+        
         // Called before each frame is rendered
-
+        
         // Initialize _lastUpdateTime if it has not already been
         if(isDragging) {
             if (self.lastUpdateTime == 0) {
-              self.lastUpdateTime = currentTime
+                self.lastUpdateTime = currentTime
             }
-
+            
             // Calculate time since last update
             let dt = currentTime - self.lastUpdateTime
-
+            
             // Update the Spawn Timer
             currentRainDropSpawnTime += dt
-
+            
             let posisi = player.update(deltaTime: dt)
             
             if currentRainDropSpawnTime > rainDropSpawnRate {
                 currentRainDropSpawnTime = 0
                 
                 if progressBar < 10 {
-                    spawnRain(image: SKSpriteNode(imageNamed: "air"), posisi)
+                    spawnRain(true ,image: SKSpriteNode(imageNamed: "air"), posisi)
                 } else {
-                    spawnRain(image: SKSpriteNode(imageNamed: "pupuk"), posisi)
+                    spawnRain(false ,image: SKSpriteNode(imageNamed: "pupuk"), posisi)
                 }
             }
-
+            
             self.lastUpdateTime = currentTime
         }
-    
+        
     }
     
-    func spawnRain(image: SKSpriteNode, _ posisi: CGPoint) {
-        let droplets = Droplets(image: image, posisi)
+    func spawnRain(_ num: Bool ,image: SKSpriteNode, _ posisi: CGPoint) {
+        let droplets = Droplets(num ,image: image, posisi)
         self.addChild(droplets)
+    }
+    
+    func spawnWater(_ num: Bool, _ posisi: CGPoint) {
+        if (num) {
+            let water = WaterSphere(num, image: SKSpriteNode(imageNamed: "waterSphere"), posisi)
+            self.addChild(water)
+        } else {
+            let water = WaterSphere(num, image: SKSpriteNode(imageNamed: "pupukSphere"), posisi)
+            self.addChild(water)
+        }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -150,29 +165,63 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let springAction = SKAction.sequence([scaleUpAction, scaleDownAction])
         
         if (contact.bodyA.categoryBitMask == CollisionTypes.droplets.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.wall.rawValue) {
+            
+            let dropletsNode = contact.bodyA.node as? Droplets
+            spawnWater(dropletsNode?.checkImage() ?? false, CGPoint(x: contact.contactPoint.x, y: contact.contactPoint.y + 2))
+            
+            let move = SKAction.move(to: contact.contactPoint, duration: 0.25)
+            let scale = SKAction.scale(to: 0.0001, duration: 0.25)
+            let sequence = SKAction.sequence([move, scale])
+            
+            contact.bodyA.node?.run(sequence)
             contact.bodyA.node?.physicsBody?.categoryBitMask = 0
+            
         } else if (contact.bodyA.categoryBitMask == CollisionTypes.wall.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.droplets.rawValue) {
+            
+            let move = SKAction.move(to: contact.contactPoint, duration: 0.25)
+            let scale = SKAction.scale(to: 0.0001, duration: 0.25)
+            let sequence = SKAction.sequence([move, scale])
+            
+            let dropletsNode = contact.bodyB.node as? Droplets
+            spawnWater(dropletsNode?.checkImage() ?? false, CGPoint(x: contact.contactPoint.x, y: contact.contactPoint.y + 2))
+            
+            contact.bodyB.node?.run(sequence)
             contact.bodyB.node?.physicsBody?.categoryBitMask = 0
         }
         
         guard let nodeA = contact.bodyA.node else { return }
         guard let nodeB = contact.bodyB.node else { return }
         
-        if (contact.bodyA.categoryBitMask == CollisionTypes.plant.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.droplets.rawValue){
-            let move = SKAction.move(to: nodeA.position, duration: 0.25)
-            let scale = SKAction.scale(to: 0.0001, duration: 0.25)
-            let sequence = SKAction.sequence([move, scale])
-            contact.bodyB.node?.run(sequence)
+        let move = SKAction.move(to: nodeA.position, duration: 0.25)
+        let move2 = SKAction.move(to: nodeB.position, duration: 0.25)
+        let scale = SKAction.scale(to: 0.0001, duration: 0.25)
+        let sequenceA = SKAction.sequence([move, scale])
+        let sequenceB = SKAction.sequence([move2, scale])
+
+        var checkValueWater: Bool = true
+        var checkValueDrop: Bool = true
+        
+        if ((contact.bodyA.categoryBitMask == CollisionTypes.plant.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.droplets.rawValue)) || ((contact.bodyA.categoryBitMask == CollisionTypes.plant.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.waterSphere.rawValue)) {
+            
+            if (contact.bodyB.categoryBitMask == CollisionTypes.waterSphere.rawValue) {
+                let waterSphereNode = contact.bodyB.node as? WaterSphere
+                checkValueWater = waterSphereNode?.checkWater() ?? false
+            } else if (contact.bodyB.categoryBitMask == CollisionTypes.droplets.rawValue) {
+                let dropletsNode = contact.bodyB.node as? Droplets
+                checkValueDrop = dropletsNode?.checkImage() ?? false
+            }
+            
+            contact.bodyB.node?.run(sequenceA)
             contact.bodyB.node?.physicsBody?.categoryBitMask = 0
             
             // to handle water to the plant event
-            if progressBar < 10.0 {
+            if (progressBar < 10.0) && (checkValueWater == true || checkValueWater == true)  {
                 progressBar += 1.0
-                if(progressBar == 6) {
+                if(progressBar == 6.0) {
                     plant.removeFromParent()
                     plant1p5.run(springAction)
                     self.addChild(plant1p5)
-                } else if(progressBar == 10) {
+                } else if(progressBar == 10.0) {
                     player.removeAllChildren()
                     player2.run(springAction)
                     player.addChild(player2)
@@ -180,34 +229,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     plant2.run(springAction)
                     self.addChild(plant2)
                 }
-            } else if fertilizerProgress < 10 {
+            } else if (fertilizerProgress < 10.0) && (checkValueWater == false || checkValueDrop == false) {
                 fertilizerProgress += 1.0
-                if(fertilizerProgress == 6) {
+                if(fertilizerProgress == 6.0) {
                     plant2.removeFromParent()
                     plant2p5.run(springAction)
                     self.addChild(plant2p5)
-                } else if(fertilizerProgress == 10) {
+                } else if(fertilizerProgress == 10.0) {
                     plant2p5.removeFromParent()
                     plant3.run(springAction)
                     self.addChild(plant3)
                 }
             }
             
-        } else if (contact.bodyA.categoryBitMask == CollisionTypes.droplets.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.plant.rawValue){
-            let move = SKAction.move(to: nodeB.position, duration: 0.25)
-            let scale = SKAction.scale(to: 0.0001, duration: 0.25)
-            let sequence = SKAction.sequence([move, scale])
-            contact.bodyA.node?.run(sequence)
+        } else if ((contact.bodyA.categoryBitMask == CollisionTypes.droplets.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.plant.rawValue)) || ((contact.bodyA.categoryBitMask == CollisionTypes.waterSphere.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.plant.rawValue)) {
+            
+            if (contact.bodyA.categoryBitMask == CollisionTypes.waterSphere.rawValue) {
+                let waterSphereNode = contact.bodyA.node as? WaterSphere
+                checkValueWater = waterSphereNode?.checkWater() ?? false
+            } else if (contact.bodyA.categoryBitMask == CollisionTypes.droplets.rawValue) {
+                let dropletsNode = contact.bodyA.node as? Droplets
+                checkValueDrop = dropletsNode?.checkImage() ?? false
+            }
+            
+            contact.bodyA.node?.run(sequenceB)
             contact.bodyA.node?.physicsBody?.categoryBitMask = 0
             
             // to handle water to the plant event
-            if progressBar < 10.0 {
+            if (progressBar < 10.0) && (checkValueWater == true || checkValueWater == true)  {
                 progressBar += 1.0
-                if(progressBar == 6) {
+                if(progressBar == 6.0) {
                     plant.removeFromParent()
                     plant1p5.run(springAction)
                     self.addChild(plant1p5)
-                } else if(progressBar == 10) {
+                } else if(progressBar == 10.0) {
                     player.removeAllChildren()
                     player2.run(springAction)
                     player.addChild(player2)
@@ -215,20 +270,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     plant2.run(springAction)
                     self.addChild(plant2)
                 }
-            } else if fertilizerProgress < 10 {
+            } else if (fertilizerProgress < 10.0) && (checkValueWater == false || checkValueDrop == false) {
                 fertilizerProgress += 1.0
-                if(fertilizerProgress == 6) {
+                if(fertilizerProgress == 6.0) {
                     plant2.removeFromParent()
                     plant2p5.run(springAction)
                     self.addChild(plant2p5)
-                } else if(fertilizerProgress == 10) {
+                } else if(fertilizerProgress == 10.0) {
                     plant2p5.removeFromParent()
                     plant3.run(springAction)
                     self.addChild(plant3)
                 }
             }
-            
         }
+        
+//        if (contact.bodyA.categoryBitMask == CollisionTypes.plant.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.waterSphere.rawValue) {
+//            
+//            if let waterSphereNode = contact.bodyB.node as? WaterSphere {
+//                checkValue = waterSphereNode.checkWater()
+//                print("1: \(checkValue)")
+//            }
+//            
+//            print("1")
+//            
+//            contact.bodyB.node?.run(sequenceA)
+//            contact.bodyB.node?.physicsBody?.categoryBitMask = 0
+//            
+//        } else if (contact.bodyA.categoryBitMask == CollisionTypes.waterSphere.rawValue) && (contact.bodyB.categoryBitMask == CollisionTypes.plant.rawValue) {
+//            
+//            let waterSphereNode = contact.bodyB.node as? WaterSphere
+//            print("\(String(describing: waterSphereNode?.checkWater()))")
+//            
+//            if let waterSphereNode = contact.bodyA.node as? WaterSphere {
+//                checkValue = waterSphereNode.checkWater()
+//                print("2: \(checkValue)")
+//            }
+//            
+//            print("2")
+//            
+//            contact.bodyA.node?.run(sequenceB)
+//            contact.bodyA.node?.physicsBody?.categoryBitMask = 0
+//        }
+        
     }
 }
 

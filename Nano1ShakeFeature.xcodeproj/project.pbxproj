@@ -21,6 +21,7 @@
 		9314AA732BDBC08E00E8060B /* ThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314AA722BDBC08E00E8060B /* ThirdView.swift */; };
 		934873182BE08E37008FC3A5 /* AnimatedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934873172BE08E37008FC3A5 /* AnimatedImage.swift */; };
 		9348731C2BE14638008FC3A5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9348731B2BE14638008FC3A5 /* GameScene.swift */; };
+		9348731E2BE214A8008FC3A5 /* WaterSphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9348731D2BE214A8008FC3A5 /* WaterSphere.swift */; };
 		93512FD82BDA1189003AE2A0 /* Nano1ShakeFeatureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93512FD72BDA1189003AE2A0 /* Nano1ShakeFeatureApp.swift */; };
 		93512FDA2BDA1189003AE2A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93512FD92BDA1189003AE2A0 /* ContentView.swift */; };
 		93512FDC2BDA118C003AE2A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93512FDB2BDA118C003AE2A0 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		9314AA722BDBC08E00E8060B /* ThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdView.swift; sourceTree = "<group>"; };
 		934873172BE08E37008FC3A5 /* AnimatedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImage.swift; sourceTree = "<group>"; };
 		9348731B2BE14638008FC3A5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		9348731D2BE214A8008FC3A5 /* WaterSphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterSphere.swift; sourceTree = "<group>"; };
 		93512FD42BDA1189003AE2A0 /* Nano1ShakeFeature.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nano1ShakeFeature.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93512FD72BDA1189003AE2A0 /* Nano1ShakeFeatureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nano1ShakeFeatureApp.swift; sourceTree = "<group>"; };
 		93512FD92BDA1189003AE2A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				930E6FE22BDF69D700A026CD /* Droplets.swift */,
 				930E6FE42BDF6AE400A026CD /* Player.swift */,
 				930E6FEC2BDFD3D300A026CD /* Plant.swift */,
+				9348731D2BE214A8008FC3A5 /* WaterSphere.swift */,
 			);
 			path = Sprites;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9348731E2BE214A8008FC3A5 /* WaterSphere.swift in Sources */,
 				93512FDA2BDA1189003AE2A0 /* ContentView.swift in Sources */,
 				9348731C2BE14638008FC3A5 /* GameScene.swift in Sources */,
 				930E6FBF2BDF580000A026CD /* plantingView.swift in Sources */,

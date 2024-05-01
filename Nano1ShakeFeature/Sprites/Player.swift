@@ -15,7 +15,7 @@ class Player: SKNode {
     init(image: SKSpriteNode) {
         super.init()
 //        let player = Player(imageNamed: "siram")
-        self.zPosition = 1
+        self.zPosition = 3
         
 //        let path = UIBezierPath()
 //        path.move(to: CGPoint())

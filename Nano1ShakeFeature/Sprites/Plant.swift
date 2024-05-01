@@ -25,7 +25,9 @@ class Plant: SKNode {
 //        self.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 120)
         
         self.physicsBody?.categoryBitMask = CollisionTypes.plant.rawValue
-        self.physicsBody?.contactTestBitMask = CollisionTypes.droplets.rawValue
+        self.physicsBody?.contactTestBitMask = CollisionTypes.droplets.rawValue | CollisionTypes.waterSphere.rawValue
+        
+        self.zPosition = 1
         
         self.physicsBody?.isDynamic = false
         

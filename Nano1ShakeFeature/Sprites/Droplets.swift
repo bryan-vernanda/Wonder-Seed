@@ -10,9 +10,11 @@ import SpriteKit
 //import CoreMotion
 
 class Droplets: SKNode{
-    
-    init(image: SKSpriteNode, _ pos: CGPoint) {
+    var check: Bool = false
+    init(_ num: Bool,image: SKSpriteNode, _ pos: CGPoint) {
         super.init()
+        
+        self.check = num
         
         //set the position of the node
         self.position = pos
@@ -27,6 +29,8 @@ class Droplets: SKNode{
         self.physicsBody?.contactTestBitMask = CollisionTypes.plant.rawValue | CollisionTypes.wall.rawValue
         self.physicsBody?.collisionBitMask = 0
         
+        self.zPosition = 1
+        
         self.physicsBody?.linearDamping = 5 //adjust how fast an object falls
 //        self.physicsBody?.restitution = 2 //adjust how bouncy an object is
         
@@ -36,5 +40,9 @@ class Droplets: SKNode{
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func checkImage() -> Bool {
+        return self.check
     }
 }

@@ -14,11 +14,14 @@ class WallGame: SKNode {
         
         //set the size and position of the node
 //        self.position = CGPoint(x: 20, y: 0)
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: worldFrame)
+        let path = UIBezierPath(roundedRect: worldFrame, cornerRadius: 60)
         
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: path.cgPath)
         self.physicsBody?.categoryBitMask = CollisionTypes.wall.rawValue
         self.physicsBody?.contactTestBitMask = CollisionTypes.droplets.rawValue
         self.physicsBody?.collisionBitMask = CollisionTypes.player.rawValue
+        
+        self.zPosition = 1
         
         //apply a physics body to the node
         self.physicsBody?.isDynamic = false
