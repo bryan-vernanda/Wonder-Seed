@@ -10,14 +10,20 @@ import SpriteKit
 
 struct plantingView: View {
     var gameScene: GameScene
+    var sunkitUI: SunKitUtil
     @State var progressBar:CGFloat = 0
     @State var fertilizerProgress: CGFloat = 0
     @State var navigateToAchivementComplete: Bool = false
+    @State var sunCoordinator: Bool = false
     @Environment (\.dismiss) var dismiss
+    @State private var xOffsetSun: CGFloat = 0
+    @State private var yOffsetSun: CGFloat = 0
     
     init() {
         gameScene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         gameScene.scaleMode = .fill
+        
+        sunkitUI = SunKitUtil()
     }
     
     var body: some View {
@@ -34,7 +40,17 @@ struct plantingView: View {
                             navigateToAchivementComplete = true
                         }
                     })
-                
+                Image("sun").position(CGPoint(x: 380, y: 80))
+                    .offset(x: xOffsetSun, y: yOffsetSun)
+                    .onReceive(sunkitUI.$sunBoolCheck, perform: { value in
+                        sunCoordinator = true
+                    })
+                    .onAppear {
+                        withAnimation(.easeInOut(duration: 1)) {
+                            xOffsetSun = -180
+                            yOffsetSun = -100
+                        }
+                     }
                 WaterBar(current: $progressBar, width: 177, height: 16)
                     .position(CGPoint(x: 130, y: 80))
                 
