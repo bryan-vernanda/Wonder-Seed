@@ -36,7 +36,7 @@ struct plantingView: View {
                     })
                     .onReceive(gameScene.$fertilizerProgress, perform: { value in
                         self.fertilizerProgress = value
-                        if (fertilizerProgress == 10 && progressBar == 10) {
+                        if (fertilizerProgress == 10 && progressBar == 10 && sunkitUI.sunBoolCheck) {
                             navigateToAchivementComplete = true
                         }
                     })
@@ -44,13 +44,15 @@ struct plantingView: View {
                     .offset(x: xOffsetSun, y: yOffsetSun)
                     .onReceive(sunkitUI.$sunBoolCheck, perform: { value in
                         sunCoordinator = true
-                    })
-                    .onAppear {
-                        withAnimation(.easeInOut(duration: 1)) {
-                            xOffsetSun = -180
-                            yOffsetSun = -100
+                        if sunkitUI.sunBoolCheck {
+                            withAnimation(.easeInOut(duration: 1)) {
+                                xOffsetSun = -180
+                                yOffsetSun = -100
+                            }
                         }
-                     }
+                        
+                    })
+                    
                 WaterBar(current: $progressBar, width: 177, height: 16)
                     .position(CGPoint(x: 130, y: 80))
                 
@@ -73,46 +75,13 @@ struct plantingView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .onAppear(){
+            sunkitUI.initiateSun()
+            sunkitUI.isPhoneFacingSun()
+        }
     }
 }
 
 #Preview {
     plantingView()
 }
-
-//        @Environment(\.dismiss)  var dismiss
-//        ZStack{
-//
-//
-//            VStack(alignment: .leading){
-//                Button(action: {
-//                    dismiss()
-//                    print("Success")
-//                }) {
-//                    Image(systemName: "chevron.backward.circle")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .foregroundColor(Color.P_700)
-//                        .frame(width: 30, height: 30)
-//                }.padding(27)
-//                Rectangle()
-//                    .foregroundColor(.white)
-//                Rectangle()
-//                    .foregroundColor(Color("grassColor"))
-//                    .ignoresSafeArea()
-//                    .frame(height: 255)
-//
-//            }
-//            Image("bibit").resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: 170, height: 250
-//                )
-//                .position(x: 190, y:500)
-////                .position(x: UIScreen.main.bounds.width
-////                          , y: UIScreen.main.bounds.height
-////                )
-//
-//            .navigationBarBackButtonHidden()
-//            .navigationBarBackButtonHidden()
-
-//        }
