@@ -34,7 +34,7 @@ struct plantingView: View {
                             navigateToAchivementComplete = true
                         }
                     })
-                
+                Image("sun").position(CGPoint(x: 380, y: 80))
                 WaterBar(current: $progressBar, width: 177, height: 16)
                     .position(CGPoint(x: 130, y: 80))
                 
