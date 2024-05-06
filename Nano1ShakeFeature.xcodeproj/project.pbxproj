@@ -17,7 +17,6 @@
 		930E6FF52BDFE07700A026CD /* fertilizerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E6FF42BDFE07700A026CD /* fertilizerBar.swift */; };
 		93136A842BDD45AA00C04E4C /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93136A832BDD45AA00C04E4C /* SplashView.swift */; };
 		93136A882BDD53A600C04E4C /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93136A872BDD53A600C04E4C /* ringtone.mp3 */; };
-		9314AA732BDBC08E00E8060B /* ThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314AA722BDBC08E00E8060B /* ThirdView.swift */; };
 		9348731C2BE14638008FC3A5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9348731B2BE14638008FC3A5 /* GameScene.swift */; };
 		9348731E2BE214A8008FC3A5 /* WaterSphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9348731D2BE214A8008FC3A5 /* WaterSphere.swift */; };
 		93512FD82BDA1189003AE2A0 /* Nano1ShakeFeatureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93512FD72BDA1189003AE2A0 /* Nano1ShakeFeatureApp.swift */; };
@@ -26,6 +25,8 @@
 		93512FDF2BDA118C003AE2A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93512FDE2BDA118C003AE2A0 /* Preview Assets.xcassets */; };
 		93512FEA2BDA7F8A003AE2A0 /* ShakeGestureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93512FE92BDA7F8A003AE2A0 /* ShakeGestureManager.swift */; };
 		93512FF22BDA8F5A003AE2A0 /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93512FF12BDA8F5A003AE2A0 /* Shake.swift */; };
+		9388AC192BE915B6003C443D /* SunKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9388AC182BE915B6003C443D /* SunKit */; };
+		9388AC1B2BE92AF5003C443D /* ItemDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9388AC1A2BE92AF5003C443D /* ItemDrop.swift */; };
 		93FE573E2BE292D100794DB6 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FE573D2BE292D100794DB6 /* Vibrate.swift */; };
 		93FE57422BE29E8C00794DB6 /* GlowingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FE57412BE29E8C00794DB6 /* GlowingView.swift */; };
 		E428DA5D2BE338AD00D2D00B /* SunKitUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428DA5C2BE338AD00D2D00B /* SunKitUtil.swift */; };
@@ -45,7 +46,6 @@
 		930E6FF42BDFE07700A026CD /* fertilizerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fertilizerBar.swift; sourceTree = "<group>"; };
 		93136A832BDD45AA00C04E4C /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		93136A872BDD53A600C04E4C /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = "<group>"; };
-		9314AA722BDBC08E00E8060B /* ThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdView.swift; sourceTree = "<group>"; };
 		9348731B2BE14638008FC3A5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		9348731D2BE214A8008FC3A5 /* WaterSphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterSphere.swift; sourceTree = "<group>"; };
 		93512FD42BDA1189003AE2A0 /* Wonder Seed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wonder Seed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +55,7 @@
 		93512FDE2BDA118C003AE2A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		93512FE92BDA7F8A003AE2A0 /* ShakeGestureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGestureManager.swift; sourceTree = "<group>"; };
 		93512FF12BDA8F5A003AE2A0 /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
+		9388AC1A2BE92AF5003C443D /* ItemDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDrop.swift; sourceTree = "<group>"; };
 		93FE573D2BE292D100794DB6 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
 		93FE57412BE29E8C00794DB6 /* GlowingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowingView.swift; sourceTree = "<group>"; };
 		E428DA5C2BE338AD00D2D00B /* SunKitUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunKitUtil.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 			files = (
 				E4B48C472BE3385000EC0E0A /* SunKit in Frameworks */,
 				E4B48C432BE337B100EC0E0A /* SunKit in Frameworks */,
+				9388AC192BE915B6003C443D /* SunKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +84,7 @@
 				930E6FE42BDF6AE400A026CD /* Player.swift */,
 				930E6FEC2BDFD3D300A026CD /* Plant.swift */,
 				9348731D2BE214A8008FC3A5 /* WaterSphere.swift */,
+				9388AC1A2BE92AF5003C443D /* ItemDrop.swift */,
 			);
 			path = Sprites;
 			sourceTree = "<group>";
@@ -91,7 +94,6 @@
 			children = (
 				93136A832BDD45AA00C04E4C /* SplashView.swift */,
 				93512FD92BDA1189003AE2A0 /* ContentView.swift */,
-				9314AA722BDBC08E00E8060B /* ThirdView.swift */,
 				930E6FBC2BDF57E100A026CD /* AchievementView.swift */,
 				930E6FBE2BDF580000A026CD /* plantingView.swift */,
 				930E6FF22BDFE03100A026CD /* WaterBar.swift */,
@@ -187,6 +189,7 @@
 			packageProductDependencies = (
 				E4B48C422BE337B100EC0E0A /* SunKit */,
 				E4B48C462BE3385000EC0E0A /* SunKit */,
+				9388AC182BE915B6003C443D /* SunKit */,
 			);
 			productName = Nano1ShakeFeature;
 			productReference = 93512FD42BDA1189003AE2A0 /* Wonder Seed.app */;
@@ -217,7 +220,7 @@
 			);
 			mainGroup = 93512FCB2BDA1189003AE2A0;
 			packageReferences = (
-				E4B48C412BE337B100EC0E0A /* XCLocalSwiftPackageReference "../../../SunKit" */,
+				9388AC172BE915B6003C443D /* XCLocalSwiftPackageReference "../../Downloads/SunKit-main" */,
 			);
 			productRefGroup = 93512FD52BDA1189003AE2A0 /* Products */;
 			projectDirPath = "";
@@ -261,8 +264,8 @@
 				930E6FE52BDF6AE400A026CD /* Player.swift in Sources */,
 				930E6FBD2BDF57E100A026CD /* AchievementView.swift in Sources */,
 				930E6FF32BDFE03100A026CD /* WaterBar.swift in Sources */,
+				9388AC1B2BE92AF5003C443D /* ItemDrop.swift in Sources */,
 				930E6FE12BDF67D800A026CD /* WallGame.swift in Sources */,
-				9314AA732BDBC08E00E8060B /* ThirdView.swift in Sources */,
 				93512FEA2BDA7F8A003AE2A0 /* ShakeGestureManager.swift in Sources */,
 				930E6FED2BDFD3D300A026CD /* Plant.swift in Sources */,
 				93136A842BDD45AA00C04E4C /* SplashView.swift in Sources */,
@@ -399,7 +402,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nano1ShakeFeature/Preview Content\"";
-				DEVELOPMENT_TEAM = Z5LAH6MA86;
+				DEVELOPMENT_TEAM = 2U62MM8G6X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -429,7 +432,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nano1ShakeFeature/Preview Content\"";
-				DEVELOPMENT_TEAM = Z5LAH6MA86;
+				DEVELOPMENT_TEAM = 2U62MM8G6X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -475,13 +478,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		E4B48C412BE337B100EC0E0A /* XCLocalSwiftPackageReference "../../../SunKit" */ = {
+		9388AC172BE915B6003C443D /* XCLocalSwiftPackageReference "../../Downloads/SunKit-main" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../../SunKit;
+			relativePath = "../../Downloads/SunKit-main";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9388AC182BE915B6003C443D /* SunKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SunKit;
+		};
 		E4B48C422BE337B100EC0E0A /* SunKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SunKit;

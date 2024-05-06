@@ -16,11 +16,13 @@ enum CollisionTypes: UInt32 {
     case droplets = 4
     case plant = 8
     case waterSphere = 16
+    case itemDrop = 32
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var motionManager: CMMotionManager?
+    var playerRemoved = false
     private var lastUpdateTime : TimeInterval = 0
     private var currentRainDropSpawnTime : TimeInterval = 0
     private var rainDropSpawnRate : TimeInterval = 0.5
@@ -35,11 +37,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var plant3p5 = Plant(image: SKSpriteNode(imageNamed: "growth3p5"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 58), 1)
     var plant4 = Plant(image: SKSpriteNode(imageNamed: "growth3"), 1, CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - 56), 1)
     
+    var itemApple = ItemDrop(image: SKSpriteNode(imageNamed: "apple"))
+    
     private var isDragging = false
     var backgroundNode = SKSpriteNode()
     var mapSize: CGSize = CGSize()
     @Published var fertilizerProgress: CGFloat = 0
     @Published var progressBar: CGFloat = 0
+    @Published var statusDirectPage: Bool = false
     
     override func didMove(to view: SKView) {
         
@@ -82,12 +87,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touchPoint = touches.first?.location(in: self)
         
-        if let point = touchPoint {
-            player.setDestination(destination: point)
-            player.physicsBody?.isDynamic = false
-            isDragging = true
+        if(playerRemoved == false) {
+            let touchPoint = touches.first?.location(in: self)
+            if let point = touchPoint {
+                player.setDestination(destination: point)
+                player.physicsBody?.isDynamic = false
+                isDragging = true
+            }
+        } else {
+            guard let touch = touches.first else { return }
+            let touchLocation = touch.location(in: self) //kalo ini jadi CGPoint, tapi kenapa yang diatas touchPoint bukan CGPoint? ga ngerti dah aowkoakw
+            
+            let touchedNodes = nodes(at: touchLocation)
+            for node in touchedNodes {
+                if node is ItemDrop {
+                    statusDirectPage = true
+                }
+            }
         }
     }
     
@@ -115,7 +132,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Called before each frame is rendered
         
         // Initialize _lastUpdateTime if it has not already been
-        if(isDragging) {
+        if(isDragging && playerRemoved == false) {
             if (self.lastUpdateTime == 0) {
                 self.lastUpdateTime = currentTime
             }
@@ -217,28 +234,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // to handle water to the plant event
             if (progressBar < 10.0) && (checkValueWater == true || checkValueWater == true)  {
                 progressBar += 1.0
-                if(progressBar == 6.0) {
+                if(progressBar == 3.0) {
                     plant.removeFromParent()
                     plant1p5.run(springAction)
                     self.addChild(plant1p5)
+                } else if(progressBar == 6.0) {
+                    plant1p5.removeFromParent()
+                    plant2.run(springAction)
+                    self.addChild(plant2)
                 } else if(progressBar == 10.0) {
                     player.removeAllChildren()
                     player2.run(springAction)
                     player.addChild(player2)
-                    plant1p5.removeFromParent()
-                    plant2.run(springAction)
-                    self.addChild(plant2)
-                }
-            } else if (fertilizerProgress < 10.0) && (checkValueWater == false || checkValueDrop == false) {
-                fertilizerProgress += 1.0
-                if(fertilizerProgress == 6.0) {
                     plant2.removeFromParent()
                     plant2p5.run(springAction)
                     self.addChild(plant2p5)
-                } else if(fertilizerProgress == 10.0) {
+                }
+            } else if (fertilizerProgress < 10.0) && (checkValueWater == false || checkValueDrop == false) {
+                fertilizerProgress += 1.0
+                if(fertilizerProgress == 3.0) {
                     plant2p5.removeFromParent()
                     plant3.run(springAction)
                     self.addChild(plant3)
+                } else if(fertilizerProgress == 6.0) {
+                    plant3.removeFromParent()
+                    plant3p5.run(springAction)
+                    self.addChild(plant3p5)
+                } else if(fertilizerProgress == 10.0) {
+                    plant3p5.removeFromParent()
+                    plant4.run(springAction)
+                    self.addChild(plant4)
+                    player.removeFromParent()
+                    playerRemoved = true
+                    self.addChild(itemApple)
                 }
             }
             
@@ -258,28 +286,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // to handle water to the plant event
             if (progressBar < 10.0) && (checkValueWater == true || checkValueWater == true)  {
                 progressBar += 1.0
-                if(progressBar == 6.0) {
+                if(progressBar == 3.0) {
                     plant.removeFromParent()
                     plant1p5.run(springAction)
                     self.addChild(plant1p5)
+                } else if(progressBar == 6.0) {
+                    plant1p5.removeFromParent()
+                    plant2.run(springAction)
+                    self.addChild(plant2)
                 } else if(progressBar == 10.0) {
                     player.removeAllChildren()
                     player2.run(springAction)
                     player.addChild(player2)
-                    plant1p5.removeFromParent()
-                    plant2.run(springAction)
-                    self.addChild(plant2)
-                }
-            } else if (fertilizerProgress < 10.0) && (checkValueWater == false || checkValueDrop == false) {
-                fertilizerProgress += 1.0
-                if(fertilizerProgress == 6.0) {
                     plant2.removeFromParent()
                     plant2p5.run(springAction)
                     self.addChild(plant2p5)
-                } else if(fertilizerProgress == 10.0) {
+                }
+            } else if (fertilizerProgress < 10.0) && (checkValueWater == false || checkValueDrop == false) {
+                fertilizerProgress += 1.0
+                if(fertilizerProgress == 3.0) {
                     plant2p5.removeFromParent()
                     plant3.run(springAction)
                     self.addChild(plant3)
+                } else if(fertilizerProgress == 6.0) {
+                    plant3.removeFromParent()
+                    plant3p5.run(springAction)
+                    self.addChild(plant3p5)
+                } else if(fertilizerProgress == 10.0) {
+                    plant3p5.removeFromParent()
+                    plant4.run(springAction)
+                    self.addChild(plant4)
+                    player.removeFromParent()
+                    playerRemoved = true
+                    self.addChild(itemApple)
                 }
             }
         }

@@ -14,10 +14,12 @@ struct plantingView: View {
     @State var progressBar:CGFloat = 0
     @State var fertilizerProgress: CGFloat = 0
     @State var navigateToAchivementComplete: Bool = false
-    @State var sunCoordinator: Bool = false
     @Environment (\.dismiss) var dismiss
     @State private var xOffsetSun: CGFloat = 0
     @State private var yOffsetSun: CGFloat = 0
+    @State private var isImageVisible = true
+    @State private var imageString = "questionIcon"
+
     
     init() {
         gameScene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
@@ -36,14 +38,15 @@ struct plantingView: View {
                     })
                     .onReceive(gameScene.$fertilizerProgress, perform: { value in
                         self.fertilizerProgress = value
-                        if (fertilizerProgress == 10 && progressBar == 10 && sunkitUI.sunBoolCheck) {
-                            navigateToAchivementComplete = true
-                        }
                     })
+                    .onReceive(gameScene.$statusDirectPage, perform: { value in
+                        self.navigateToAchivementComplete = value
+                    })
+                //nanti pagi benerin lagi, soalnya gabisa cobain sun nya sekarang, nanti tolong bikin kalo misal matahari blm gerak, gabisa diapa-apain sprite viewnya, harusnya pake on recieve si sun nya aja deh
+                
                 Image("sun").position(CGPoint(x: 380, y: 80))
                     .offset(x: xOffsetSun, y: yOffsetSun)
                     .onReceive(sunkitUI.$sunBoolCheck, perform: { value in
-                        sunCoordinator = true
                         if sunkitUI.sunBoolCheck {
                             withAnimation(.easeInOut(duration: 1)) {
                                 xOffsetSun = -180
@@ -58,6 +61,32 @@ struct plantingView: View {
                 
                 fertilizerBar(current: $fertilizerProgress, width: 177, height: 16)
                     .position(CGPoint(x: 130, y: 120))
+                
+                Image("sunIcon")
+                    .position(CGPoint(x: 53, y: 165))
+                
+                VStack {
+                    Image(imageString)
+                        .opacity(isImageVisible ? 1 : 0)
+                        .scaleEffect(isImageVisible ? 1 : 1.2)
+                        .onAppear {
+                            withAnimation(Animation.spring(response: 0.5, dampingFraction: 0.5).repeatForever(autoreverses: true)) {
+                                isImageVisible.toggle()
+                            }
+                        }
+                        .onDisappear {
+                            withAnimation(Animation.spring(response: 0.5, dampingFraction: 0.5).repeatForever(autoreverses: true)) {
+                                isImageVisible.toggle()
+                            }
+                        }
+                        .onReceive(sunkitUI.$sunBoolCheck, perform: { value in
+                            if sunkitUI.sunBoolCheck {
+                                imageString = "checkBox"
+                            }
+                        })
+                }
+                .position(CGPoint(x: 90, y: 165))
+                //bungkus vstack buat ganti position parentnya
                 
                 Button(action: {
                     dismiss()
