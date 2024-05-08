@@ -27,6 +27,7 @@
 		93512FF22BDA8F5A003AE2A0 /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93512FF12BDA8F5A003AE2A0 /* Shake.swift */; };
 		9388AC192BE915B6003C443D /* SunKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9388AC182BE915B6003C443D /* SunKit */; };
 		9388AC1B2BE92AF5003C443D /* ItemDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9388AC1A2BE92AF5003C443D /* ItemDrop.swift */; };
+		9388AC1E2BE9D39E003C443D /* SunKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9388AC1D2BE9D39E003C443D /* SunKit */; };
 		93FE573E2BE292D100794DB6 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FE573D2BE292D100794DB6 /* Vibrate.swift */; };
 		93FE57422BE29E8C00794DB6 /* GlowingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FE57412BE29E8C00794DB6 /* GlowingView.swift */; };
 		E428DA5D2BE338AD00D2D00B /* SunKitUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428DA5C2BE338AD00D2D00B /* SunKitUtil.swift */; };
@@ -67,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9388AC1E2BE9D39E003C443D /* SunKit in Frameworks */,
 				E4B48C472BE3385000EC0E0A /* SunKit in Frameworks */,
 				E4B48C432BE337B100EC0E0A /* SunKit in Frameworks */,
 				9388AC192BE915B6003C443D /* SunKit in Frameworks */,
@@ -190,6 +192,7 @@
 				E4B48C422BE337B100EC0E0A /* SunKit */,
 				E4B48C462BE3385000EC0E0A /* SunKit */,
 				9388AC182BE915B6003C443D /* SunKit */,
+				9388AC1D2BE9D39E003C443D /* SunKit */,
 			);
 			productName = Nano1ShakeFeature;
 			productReference = 93512FD42BDA1189003AE2A0 /* Wonder Seed.app */;
@@ -220,7 +223,7 @@
 			);
 			mainGroup = 93512FCB2BDA1189003AE2A0;
 			packageReferences = (
-				9388AC172BE915B6003C443D /* XCLocalSwiftPackageReference "../../Downloads/SunKit-main" */,
+				9388AC1C2BE9D39E003C443D /* XCLocalSwiftPackageReference "../../Downloads/SunKit-main" */,
 			);
 			productRefGroup = 93512FD52BDA1189003AE2A0 /* Products */;
 			projectDirPath = "";
@@ -478,7 +481,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		9388AC172BE915B6003C443D /* XCLocalSwiftPackageReference "../../Downloads/SunKit-main" */ = {
+		9388AC1C2BE9D39E003C443D /* XCLocalSwiftPackageReference "../../Downloads/SunKit-main" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../Downloads/SunKit-main";
 		};
@@ -486,6 +489,10 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		9388AC182BE915B6003C443D /* SunKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SunKit;
+		};
+		9388AC1D2BE9D39E003C443D /* SunKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SunKit;
 		};

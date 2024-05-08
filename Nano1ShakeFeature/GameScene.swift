@@ -46,6 +46,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     @Published var progressBar: CGFloat = 0
     @Published var statusDirectPage: Bool = false
     
+    @Binding var statusMatahari: Bool
+
+    init(size: CGSize, statusMatahari: Binding<Bool>) {
+        _statusMatahari = statusMatahari
+        super.init(size: size)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func didMove(to view: SKView) {
         
         self.backgroundNode = SKSpriteNode(texture: SKTexture(imageNamed: "Background"))
@@ -88,33 +99,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        if(playerRemoved == false) {
-            let touchPoint = touches.first?.location(in: self)
-            if let point = touchPoint {
-                player.setDestination(destination: point)
-                player.physicsBody?.isDynamic = false
-                isDragging = true
-            }
-        } else {
-            guard let touch = touches.first else { return }
-            let touchLocation = touch.location(in: self) //kalo ini jadi CGPoint, tapi kenapa yang diatas touchPoint bukan CGPoint? ga ngerti dah aowkoakw
-            
-            let touchedNodes = nodes(at: touchLocation)
-            for node in touchedNodes {
-                if node is ItemDrop {
-                    statusDirectPage = true
+        if statusMatahari {
+            if(playerRemoved == false) {
+                let touchPoint = touches.first?.location(in: self)
+                if let point = touchPoint {
+                    player.setDestination(destination: point)
+                    player.physicsBody?.isDynamic = false
+                    isDragging = true
+                }
+            } else {
+                guard let touch = touches.first else { return }
+                let touchLocation = touch.location(in: self) //kalo ini jadi CGPoint, tapi kenapa yang diatas touchPoint bukan CGPoint? ga ngerti dah aowkoakw
+                
+                let touchedNodes = nodes(at: touchLocation)
+                for node in touchedNodes {
+                    if node is ItemDrop {
+                        statusDirectPage = true
+                    }
                 }
             }
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touchPoint = touches.first?.location(in: self)
         
-        if let point = touchPoint {
-            player.setDestination(destination: point)
-            player.physicsBody?.isDynamic = false
-            isDragging = true
+        if statusMatahari {
+            let touchPoint = touches.first?.location(in: self)
+            
+            if let point = touchPoint {
+                player.setDestination(destination: point)
+                player.physicsBody?.isDynamic = false
+                isDragging = true
+            }
         }
     }
     
@@ -125,14 +141,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        if let accelerometerData = motionManager?.accelerometerData {
-            self.physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 7, dy: accelerometerData.acceleration.y * 7)
+        
+        if statusMatahari {
+            if let accelerometerData = motionManager?.accelerometerData {
+                self.physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 7, dy: accelerometerData.acceleration.y * 7)
+            }
         }
         
         // Called before each frame is rendered
         
         // Initialize _lastUpdateTime if it has not already been
-        if(isDragging && playerRemoved == false) {
+        if(isDragging && playerRemoved == false && statusMatahari) {
             if (self.lastUpdateTime == 0) {
                 self.lastUpdateTime = currentTime
             }
@@ -326,49 +345,49 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 }
 
-struct contextView: View {
-    var gameScene: GameScene
-    @State var progressBar:CGFloat = 0
-    @State var fertilizerProgress: CGFloat = 0
-    @Environment (\.dismiss) var dismiss
-    
-    init() {
-        gameScene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        gameScene.scaleMode = .fill
-    }
-    
-    var body: some View {
-        ZStack {
-            SpriteView(scene: gameScene)
-                .ignoresSafeArea()
-                .onReceive(gameScene.$progressBar, perform: { value in
-                    self.progressBar = value
-                })
-                .onReceive(gameScene.$fertilizerProgress, perform: { value in
-                    self.fertilizerProgress = value
-                })
-            
-            WaterBar(current: $progressBar, width: 177, height: 16)
-                .position(CGPoint(x: 130, y: 80))
-            
-            fertilizerBar(current: $fertilizerProgress, width: 177, height: 16)
-                .position(CGPoint(x: 130, y: 120))
-            
-            Button(action: {
-                dismiss()
-                print("Success")
-            }) {
-                Image(systemName: "chevron.backward.circle")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(Color("P-700"))
-                    .frame(width: 30, height: 30)
-            }.position(CGPoint(x: 50, y: 20))
-        }
-        .navigationBarBackButtonHidden()
-    }
-}
-
-#Preview {
-    contextView()
-}
+//struct contextView: View {
+//    var gameScene: GameScene
+//    @State var progressBar:CGFloat = 0
+//    @State var fertilizerProgress: CGFloat = 0
+//    @Environment (\.dismiss) var dismiss
+//    
+//    init() {
+//        gameScene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+//        gameScene.scaleMode = .fill
+//    }
+//    
+//    var body: some View {
+//        ZStack {
+//            SpriteView(scene: gameScene)
+//                .ignoresSafeArea()
+//                .onReceive(gameScene.$progressBar, perform: { value in
+//                    self.progressBar = value
+//                })
+//                .onReceive(gameScene.$fertilizerProgress, perform: { value in
+//                    self.fertilizerProgress = value
+//                })
+//            
+//            WaterBar(current: $progressBar, width: 177, height: 16)
+//                .position(CGPoint(x: 130, y: 80))
+//            
+//            fertilizerBar(current: $fertilizerProgress, width: 177, height: 16)
+//                .position(CGPoint(x: 130, y: 120))
+//            
+//            Button(action: {
+//                dismiss()
+//                print("Success")
+//            }) {
+//                Image(systemName: "chevron.backward.circle")
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .foregroundColor(Color("P-700"))
+//                    .frame(width: 30, height: 30)
+//            }.position(CGPoint(x: 50, y: 20))
+//        }
+//        .navigationBarBackButtonHidden()
+//    }
+//}
+//
+//#Preview {
+//    contextView()
+//}

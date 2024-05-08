@@ -9,7 +9,7 @@ import SwiftUI
 import SpriteKit
 
 struct plantingView: View {
-    var gameScene: GameScene
+    @State var gameScene: GameScene?
     var sunkitUI: SunKitUtil
     @State var progressBar:CGFloat = 0
     @State var fertilizerProgress: CGFloat = 0
@@ -19,11 +19,12 @@ struct plantingView: View {
     @State private var yOffsetSun: CGFloat = 0
     @State private var isImageVisible = true
     @State private var imageString = "questionIcon"
+    @State var statusMatahari: Bool = false
 
     
     init() {
-        gameScene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        gameScene.scaleMode = .fill
+//        gameScene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), statusMatahari: $statusMatahari)
+//        gameScene.scaleMode = .fill
         
         sunkitUI = SunKitUtil()
     }
@@ -31,23 +32,26 @@ struct plantingView: View {
     var body: some View {
         VStack {
             ZStack {
-                SpriteView(scene: gameScene)
-                    .ignoresSafeArea()
-                    .onReceive(gameScene.$progressBar, perform: { value in
-                        self.progressBar = value
+                if let gameScene = gameScene {
+                    SpriteView(scene: gameScene)
+                        .ignoresSafeArea()
+                        .onReceive(gameScene.$progressBar, perform: { value in
+                            self.progressBar = value
+                        })
+                        .onReceive(gameScene.$fertilizerProgress, perform: { value in
+                            self.fertilizerProgress = value
+                        })
+                        .onReceive(gameScene.$statusDirectPage, perform: { value in
+                            self.navigateToAchivementComplete = value
                     })
-                    .onReceive(gameScene.$fertilizerProgress, perform: { value in
-                        self.fertilizerProgress = value
-                    })
-                    .onReceive(gameScene.$statusDirectPage, perform: { value in
-                        self.navigateToAchivementComplete = value
-                    })
+                }
                 //nanti pagi benerin lagi, soalnya gabisa cobain sun nya sekarang, nanti tolong bikin kalo misal matahari blm gerak, gabisa diapa-apain sprite viewnya, harusnya pake on recieve si sun nya aja deh
                 
                 Image("sun").position(CGPoint(x: 380, y: 80))
                     .offset(x: xOffsetSun, y: yOffsetSun)
                     .onReceive(sunkitUI.$sunBoolCheck, perform: { value in
                         if sunkitUI.sunBoolCheck {
+                            statusMatahari = true
                             withAnimation(.easeInOut(duration: 1)) {
                                 xOffsetSun = -180
                                 yOffsetSun = -100
@@ -104,11 +108,20 @@ struct plantingView: View {
             }
         }
         .navigationBarBackButtonHidden()
-        .onAppear(){
+        .onAppear {
+            let newGameScene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), statusMatahari: self.$statusMatahari)
+            newGameScene.scaleMode = .fill
+            self.gameScene = newGameScene
+
             sunkitUI.initiateSun()
             sunkitUI.isPhoneFacingSun()
         }
     }
+    
+    public func checkStatus() -> Bool {
+        return statusMatahari
+    }
+    
 }
 
 #Preview {

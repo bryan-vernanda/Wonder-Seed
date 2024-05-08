@@ -56,7 +56,7 @@ class SunKitUtil: ObservableObject{
                 self.sunBoolCheck = true
             } else {
                 // Phone's rotation does not match the sun's azimuth
-//                print("Phone is not facing the sun.")
+                print("Phone is not facing the sun.")
                 self.sunBoolCheck = false
             }
         }
