@@ -1,32 +1,34 @@
 # Welcome to "Wonder Seed" App Respository
 
-Embark on an epic augmented reality (AR) adventure with "Castle Defenders: Undead Rising"! Defend your castle against relentless waves of zombies. Join forces with a friend in multiplayer mode to protect your stronghold together, or rise to the challenge and defend it solo.
+Wonder Seed is an educational and entertainment app in which designed to impresss friends at Apple Academy as part of the challenges given. This engaging game uses stunning visual animations to teach users about different types of plants. With Wonder Seed, users will receive random seeds and utilize various tools to support plant growth. The app provides new knowledge about specific plants, allowing users to discover what they are growing as the plant matures and bears easily recognizable fruit. By incorporating several Apple Technologies, Wonder Seed offers an exciting and interactive learning experience.
 
 ## Tech Stack
-✨ AR (ARKit and SceneKit)
+🎮 SpriteKit
 <br />🏃 CoreMotion
+<br />🫨 CoreHaptics
 <br />🐦 SwiftUI
 <br />📦 UIKit
-<br />👧👦 Multipeer Connectivity
+<br />🧭 CoreLocation
+<br />☀️ SunKit
 
 ## Features:
-✅ **Immersive AR Experience:**
-<br />Transform your surroundings into a medieval battlefield. Watch as zombies emerge anywhere infront of you and march towards your castle, brought to life with stunning AR technology.
+✅ **Random Seed Selection:**
+<br />Users will be given a seeds randomly, adding an element of surprise and discovery to the learning process.
 
-<br />✅ **Intuitive Controls:**
-<br />Launch arrows with precision by tapping a button on your device's screen to defend the castle against the approaching zombies.
+<br />✅ **Growth Tools:**
+<br />The app provides various tools and equipment which includes a water bucket, a fertilizer bucket and an artifical sun to help users nurture their plants and support their growth.
 
-<br />✅ **Challenging Levels:**
-<br />Face increasingly difficult waves of zombies as you progress through the game. Each level presents new challenges with more zombies approaching faster than before.
+<br />✅ **Plant Identification:**
+<br />As the plant grows and eventually bears fruit, users will learn to identify what they have grown as part of the educational purposes of the app.
 
-<br />✅ **Play Anywhere:**
-<br />Defend your castle indoors or outdoors, and experience the thrill of AR gaming in different environments. Since this game doesn't use plane detection (only anchors), it can be played anywhere without the need to find a specific surface.
+<br />✅ **Animation and Vibration:**
+<br />Experience tactile feedback through core haptics followed by animations appearing, making the learning process more engaging and interactive.
 
 <br />✅ **Accelometer:**
-<br />To make sure the device is upright with the screen facing you when playing the game.
+<br />Providing an experience of playing with water and fertilizer while nurturing the plants, where the water and fertilizer can be tilted all over the screen based on the user's device tilting direction.
 
-<br />✅ **Singleplayer and Multiplayer Modes:**
-<br />Enjoy the game solo or team up with a friend in multiplayer mode. Work together to defend your castle from the relentless zombie horde.
+<br />✅ **Achievement Page:**
+<br />Once users have successfully nurtured their plants and produced fruit, they can click on the fruit to be directed to the Achievement Page. Here, users will discover many new seeds to explore, allowing them to continue their gardening journey by repeating the gameplay process.
 
 ## Requirements:
 Currently available only on iPad and iPhone, as it doesn't support the interface of any other devices.
