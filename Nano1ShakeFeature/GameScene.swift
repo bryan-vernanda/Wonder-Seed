@@ -10,7 +10,6 @@ import CoreMotion
 import SpriteKit
 
 enum CollisionTypes: UInt32 {
-    //2^n value, harus, biar ga collide
     case player = 1
     case wall = 2
     case droplets = 4
@@ -67,16 +66,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.backgroundColor = .gray
         backgroundNode.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(backgroundNode)
-        
+
+//      uncomment below to create a custom world frame
 //                var worldFrame = frame
 //                worldFrame.origin.x -= 0.5
 //                worldFrame.origin.y += 0.5
 //                worldFrame.size.height -= 40
-        //        worldFrame.size.width -= 80
+//                worldFrame.size.width -= 80
         
         let wall = WallGame(worldFrame: frame)
         
-//                check border wall
+//      uncomment belo to check border wall
 //                let path = UIBezierPath(roundedRect: frame, cornerRadius: 60)
 //                let edgeNode = SKShapeNode(path: path.cgPath)
 //                edgeNode.strokeColor = .red
@@ -109,7 +109,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             } else {
                 guard let touch = touches.first else { return }
-                let touchLocation = touch.location(in: self) //kalo ini jadi CGPoint, tapi kenapa yang diatas touchPoint bukan CGPoint? ga ngerti dah aowkoakw
+                let touchLocation = touch.location(in: self)
                 
                 let touchedNodes = nodes(at: touchLocation)
                 for node in touchedNodes {
@@ -344,50 +344,3 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
 }
-
-//struct contextView: View {
-//    var gameScene: GameScene
-//    @State var progressBar:CGFloat = 0
-//    @State var fertilizerProgress: CGFloat = 0
-//    @Environment (\.dismiss) var dismiss
-//    
-//    init() {
-//        gameScene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-//        gameScene.scaleMode = .fill
-//    }
-//    
-//    var body: some View {
-//        ZStack {
-//            SpriteView(scene: gameScene)
-//                .ignoresSafeArea()
-//                .onReceive(gameScene.$progressBar, perform: { value in
-//                    self.progressBar = value
-//                })
-//                .onReceive(gameScene.$fertilizerProgress, perform: { value in
-//                    self.fertilizerProgress = value
-//                })
-//            
-//            WaterBar(current: $progressBar, width: 177, height: 16)
-//                .position(CGPoint(x: 130, y: 80))
-//            
-//            fertilizerBar(current: $fertilizerProgress, width: 177, height: 16)
-//                .position(CGPoint(x: 130, y: 120))
-//            
-//            Button(action: {
-//                dismiss()
-//                print("Success")
-//            }) {
-//                Image(systemName: "chevron.backward.circle")
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
-//                    .foregroundColor(Color("P-700"))
-//                    .frame(width: 30, height: 30)
-//            }.position(CGPoint(x: 50, y: 20))
-//        }
-//        .navigationBarBackButtonHidden()
-//    }
-//}
-//
-//#Preview {
-//    contextView()
-//}

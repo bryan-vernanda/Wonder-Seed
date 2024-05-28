@@ -14,21 +14,14 @@ class Player: SKNode {
     
     init(image: SKSpriteNode) {
         super.init()
-//        let player = Player(imageNamed: "siram")
+
         self.zPosition = 3
-        
-//        let path = UIBezierPath()
-//        path.move(to: CGPoint())
-//        path.addLine(to: CGPoint(x: -player.size.width / 2 - 30, y: 0))
-//        path.addLine(to: CGPoint(x: 0, y: player.size.height / 2))
-//        path.addLine(to: CGPoint(x: player.size.width / 2 + 30, y: 0))
         
         self.setScale(0.5)
         self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "penyiram"), size: CGSize(width: image.size.width * 0.5, height: image.size.height * 0.5))
         self.physicsBody?.isDynamic = true
         self.physicsBody?.categoryBitMask = CollisionTypes.player.rawValue
         self.physicsBody?.collisionBitMask = CollisionTypes.wall.rawValue
-//        player.physicsBody?.restitution = 0.9
         
         self.addChild(image)
     }

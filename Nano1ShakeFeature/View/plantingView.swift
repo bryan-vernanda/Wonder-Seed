@@ -23,9 +23,6 @@ struct plantingView: View {
 
     
     init() {
-//        gameScene = GameScene(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), statusMatahari: $statusMatahari)
-//        gameScene.scaleMode = .fill
-        
         sunkitUI = SunKitUtil()
     }
     
@@ -45,7 +42,6 @@ struct plantingView: View {
                             self.navigateToAchivementComplete = value
                     })
                 }
-                //nanti pagi benerin lagi, soalnya gabisa cobain sun nya sekarang, nanti tolong bikin kalo misal matahari blm gerak, gabisa diapa-apain sprite viewnya, harusnya pake on recieve si sun nya aja deh
                 
                 Image("sun").position(CGPoint(x: 380, y: 80))
                     .offset(x: xOffsetSun, y: yOffsetSun)

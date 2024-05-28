@@ -13,7 +13,7 @@ class WaterSphere: SKNode {
     init(_ num: Bool, image: SKSpriteNode, _ pos: CGPoint) {
         super.init()
         
-        //ini wajib pake self jir, kalo declare var SKSpritenode gitu, nanti si spritekit gabisa detect masing-masing nodenya individually and its a problem
+        //self is needed since declaring using var SKSpritenode will cause spritekit can't detect the same node individually and it's a big problem.
         self.collide = num
         
         self.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "waterSphere"), size: CGSize(width: image.size.width, height: image.size.height))

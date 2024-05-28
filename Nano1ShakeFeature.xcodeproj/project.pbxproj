@@ -144,9 +144,9 @@
 		93512FD62BDA1189003AE2A0 /* Nano1ShakeFeature */ = {
 			isa = PBXGroup;
 			children = (
-				E428DA5B2BE338A100D2D00B /* Helper */,
 				93512FD72BDA1189003AE2A0 /* Nano1ShakeFeatureApp.swift */,
 				9348731B2BE14638008FC3A5 /* GameScene.swift */,
+				E428DA5B2BE338A100D2D00B /* Helper */,
 				930E6FEE2BDFD6C800A026CD /* Sprites */,
 				930E6FF02BDFD73500A026CD /* Model */,
 				930E6FEF2BDFD6F300A026CD /* View */,

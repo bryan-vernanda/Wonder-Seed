@@ -12,8 +12,6 @@ class WallGame: SKNode {
     init(worldFrame: CGRect) {
         super.init()
         
-        //set the size and position of the node
-//        self.position = CGPoint(x: 20, y: 0)
         let path = UIBezierPath(roundedRect: worldFrame, cornerRadius: 60)
         
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: path.cgPath)
