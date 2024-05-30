@@ -36,8 +36,8 @@ Currently available only on iPhone, as it doesn't support the interface of any o
 ## How to Play:
 Upon entering the app, users are encouraged to shake their phone to receive a random seed. They will then be directed to a page where they can nurture their plant. This involves directing sunlight based on the real sun's direction from their location (currently set only to Jakarta, Indonesia, not based on users exact location), watering the plant, and adding fertilizer. Once the plant is fully nurtured, a fruit (currently only apples) will fall. Users can click on the fruit to be directed to the Achievement Page, where they can see the seeds they have unlocked. They can continue unlocking new seeds by repeating the gameplay process.
 
-## Video Demo:
-(App Demo)[https://youtube.com/shorts/_Dl8v3_9KLg?feature=shared]
+## Video App Demo:
+[Click me to view!](https://youtube.com/shorts/_Dl8v3_9KLg?feature=shared)
 
 ## ⚠️ Disclaimer:
 This app is not yet 100% complete, only main features that have been implemented. The seed and plant database has not been fully imported, and there are issues with the Achievement Page code and its animations that need optimization.
