@@ -22,7 +22,7 @@ struct AchivementView: View {
                     Image(systemName: "chevron.backward.circle")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .foregroundColor(Color.P_700)
+                        .foregroundStyle(Color.P_700)
                         .frame(width: 30, height: 30)
                 }
                 VStack{
