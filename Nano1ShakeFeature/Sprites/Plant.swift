@@ -21,7 +21,7 @@ class Plant: SKNode {
         self.physicsBody?.categoryBitMask = CollisionTypes.plant.rawValue
         self.physicsBody?.contactTestBitMask = CollisionTypes.droplets.rawValue | CollisionTypes.waterSphere.rawValue
         
-        self.zPosition = 1
+        self.zPosition = 2
         
         self.physicsBody?.isDynamic = false
         

@@ -14,7 +14,7 @@ struct plantingView: View {
     @State var progressBar:CGFloat = 0
     @State var fertilizerProgress: CGFloat = 0
     @State var navigateToAchivementComplete: Bool = false
-    @Environment (\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismiss
     @State private var xOffsetSun: CGFloat = 0
     @State private var yOffsetSun: CGFloat = 0
     @State private var isImageVisible = true
@@ -111,6 +111,8 @@ struct plantingView: View {
 
             sunkitUI.initiateSun()
             sunkitUI.isPhoneFacingSun()
+            
+            self.gameScene?.statusMatahari = true
         }
     }
     

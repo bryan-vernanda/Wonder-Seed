@@ -93,8 +93,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.physicsWorld.contactDelegate = self
         
-        motionManager = CMMotionManager()
-        motionManager?.startAccelerometerUpdates()
+//        motionManager = CMMotionManager()
+//        motionManager?.startAccelerometerUpdates()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -137,7 +137,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         isDragging = false
         player.physicsBody?.isDynamic = true
-        player.physicsBody?.affectedByGravity = true
+//        player.physicsBody?.affectedByGravity = true
     }
     
     override func update(_ currentTime: TimeInterval) {
